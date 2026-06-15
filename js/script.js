@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
     enter.addEventListener('click', () => {
       intro.classList.add('gone');
       document.body.classList.remove('intro-active');
-      revealLayers();   
+      revealLayers();
     });
   }
 });
@@ -17,6 +17,13 @@ const OVERVIEW = { center: [-124.155, 41.138], zoom: 13.5, pitch: 0, bearing: 0 
 const OCHRE = '#a55f32';
 const COLD  = '#6b7d83';
 const PANEL_W = 460;
+
+const CAMERA = {
+  "Chkweges 'W-a'aag": { zoom: 16.5, pitch: 75, bearing: 270, duration: 2000 },
+  "Sumeg Village":     { zoom: 17.5, pitch: 68, bearing: 120, duration: 1900 },
+  "Sue-meg Point":     { zoom: 15,   pitch: 0,  bearing: 0,   duration: 1500 }
+};
+const CAMERA_DEFAULT = { zoom: 15, pitch: 0, bearing: 0, duration: 1500 };
 
 const map = new mapboxgl.Map({
   container: 'map',
@@ -62,7 +69,6 @@ map.on('load', () => {
     }
   });
 
-  // park 区域文字标注（暗、贴地形、随地图变换；插在点之下）
   map.addSource('park-area-label', {
     type: 'geojson',
     data: {
@@ -75,7 +81,7 @@ map.on('load', () => {
     id: 'park-area-label',
     type: 'symbol',
     source: 'park-area-label',
-    minzoom: 13,                    
+    minzoom: 13,
     layout: {
       'text-field': ['get', 'title'],
       'text-font': ['DIN Pro Bold', 'Arial Unicode MS Regular'],
@@ -84,12 +90,12 @@ map.on('load', () => {
       'text-max-width': 20,
       'text-rotate': -45,
       'text-rotation-alignment': 'map',
-      'text-allow-overlap': true,      
-      'text-ignore-placement': true     
+      'text-allow-overlap': true,
+      'text-ignore-placement': true
     },
     paint: {
       'text-color': '#5a4632',
-      'text-opacity': 0,             
+      'text-opacity': 0,
       'text-halo-color': '#c79a6a',
       'text-halo-width': 0.5
     }
@@ -102,12 +108,12 @@ map.on('load', () => {
       features: [
         {
           type: 'Feature',
-          geometry: { type: 'Point', coordinates: [-123.89923, 41.43176] }, 
+          geometry: { type: 'Point', coordinates: [-123.89923, 41.43176] },
           properties: { title: 'YUROK ANCESTRAL TERRITORY', kind: 'ancestral' }
         },
         {
           type: 'Feature',
-          geometry: { type: 'Point', coordinates: [-123.87246, 41.34641] }, 
+          geometry: { type: 'Point', coordinates: [-123.87246, 41.34641] },
           properties: { title: 'YUROK RESERVATION', kind: 'reservation' }
         }
       ]
@@ -117,8 +123,8 @@ map.on('load', () => {
     id: 'territory-labels',
     type: 'symbol',
     source: 'territory-labels',
-    minzoom: 9,      
-    maxzoom: 11.5,   
+    minzoom: 9,
+    maxzoom: 11.5,
     layout: {
       'text-field': ['get', 'title'],
       'text-font': ['DIN Pro Bold', 'Arial Unicode MS Regular'],
@@ -132,8 +138,8 @@ map.on('load', () => {
     },
     paint: {
       'text-color': ['match', ['get', 'kind'],
-        'ancestral',   '#a02818',   
-        'reservation', '#3a5560',     
+        'ancestral',   '#a02818',
+        'reservation', '#3a5560',
         '#3a2a1a'],
       'text-opacity': ['match', ['get', 'kind'], 'ancestral', 0.5, 'reservation', 0.7, 0.55],
       'text-halo-color': '#e8dcc0',
@@ -151,18 +157,14 @@ map.on('load', () => {
   });
   if (map.getLayer('terrain')) map.setPaintProperty('terrain', 'hillshade-exaggeration', 0);
 
-
   const steps = [
-
     () => {
       if (map.getLayer('terrain'))  map.setPaintProperty('terrain', 'hillshade-exaggeration', 0.5);
       if (map.getLayer('waterway')) map.setPaintProperty('waterway', 'line-opacity', 1);
     },
-
     () => {
       if (map.getLayer('hillshade')) map.setPaintProperty('hillshade', 'fill-opacity', 0.5);
     },
-
     () => {
       if (map.getLayer('parkfill'))       map.setPaintProperty('parkfill', 'fill-opacity', 0.5);
       if (map.getLayer('park-area-label')) map.setPaintProperty('park-area-label', 'text-opacity', 0.55);
@@ -175,7 +177,6 @@ map.on('load', () => {
     console.log(e.lngLat.lng.toFixed(5) + ', ' + e.lngLat.lat.toFixed(5));
   });
 });
-
 
 map.on('click', (e) => {
   const hits = map.queryRenderedFeatures(e.point, { layers: ['points-layer'] });
@@ -201,7 +202,16 @@ map.on('zoomstart', hideHint);
 function openSidebar(feature, html) {
   hideHint();
   const coords = feature.geometry.coordinates.slice();
-  map.flyTo({ center: coords, zoom: 15, duration: 1500, essential: true, padding: { right: PANEL_W } });
+  const cam = CAMERA[feature.properties.feature_name] || CAMERA_DEFAULT;
+  map.flyTo({
+    center: coords,
+    zoom: cam.zoom,
+    pitch: cam.pitch,
+    bearing: cam.bearing,
+    duration: cam.duration,
+    essential: true,
+    padding: { right: PANEL_W }
+  });
   document.getElementById('sidebar-content').innerHTML = html;
   document.getElementById('sidebar').classList.add('active');
   sidebarOpen = true;
@@ -226,6 +236,8 @@ function showTerritory() {
   map.flyTo({
     center: [-123.94162, 41.36357],
     zoom: 9.3,
+    pitch: 0,
+    bearing: 0,
     duration: 2800,
     essential: true
   });
@@ -243,14 +255,17 @@ document.getElementById('land-ack').addEventListener('click', () => {
   else showTerritory();
 });
 
+function figureHTML(p) {
+  if (!p.image_link) return '';
+  return `<figure class="site-figure">
+    <img src="${p.image_link}" class="zoomable" alt="${p['alt-text'] || ''}"
+         onclick="openLightbox('${p.image_link}')" />
+    ${p.caption ? `<figcaption class="site-caption">${p.caption}</figcaption>` : ''}
+  </figure>`;
+}
+
 function buildCompare(p) {
-  const img = p.image_link
-    ? `<figure class="site-figure">
-         <img src="${p.image_link}" class="zoomable" alt="${p['alt-text'] || ''}"
-              onclick="openLightbox('${p.image_link}')" />
-         ${p.caption ? `<figcaption class="site-caption">${p.caption}</figcaption>` : ''}
-       </figure>`
-    : '';
+  const img = figureHTML(p);
   return `
     <h2 class="site-name">${p.feature_name || ''}</h2>
     <p class="site-formerly">formerly <s>${p.rop_renaming_former_name || ''}</s></p>
@@ -261,18 +276,13 @@ function buildCompare(p) {
     <p class="site-meta">${p.rop_renaming_park_unit || ''}</p>
     <p class="compare-point"><span class="label">Park District</span>${p.rop_renaming_park_district || ''}</p>
     <p class="compare-point"><span class="label">Tribal Partner</span>${p.rop_renaming_tribal_partner || ''}</p>
+    ${p.compare_source ? `<p class="source-note">Source: ${p.compare_source}</p>` : ''}
   `;
 }
 
 function buildPlace(p) {
   const meta = p.built ? `<p class="site-meta">reconstructed ${p.built}</p>` : '';
-  const img = p.image_link
-    ? `<figure class="site-figure">
-         <img src="${p.image_link}" class="zoomable" alt="${p['alt-text'] || ''}"
-              onclick="openLightbox('${p.image_link}')" />
-         ${p.caption ? `<figcaption class="site-caption">${p.caption}</figcaption>` : ''}
-       </figure>`
-    : '';
+  const img = figureHTML(p);
   return `
     <h2 class="site-name">${p.feature_name || ''}</h2>
     ${meta}
@@ -292,7 +302,6 @@ document.getElementById('photo-overlay').addEventListener('click', () => {
   document.getElementById('photo-overlay').classList.remove('on');
 });
 
-//Lightbox
 function openLightbox(src) {
   const lb = document.getElementById('lightbox');
   const img = document.getElementById('lightbox-img');
@@ -330,12 +339,11 @@ function revealLayers() {
     () => {
       if (map.getLayer('hillshade')) map.setPaintProperty('hillshade', 'fill-opacity', 0.5);
       const s = document.getElementById('salmon-overlay');
-      if (s) s.style.opacity = 0.12; 
+      if (s) s.style.opacity = 0.12;
     },
-    () => { 
-      if (map.getLayer('parkfill'))   map.setPaintProperty('parkfill', 'fill-opacity', 0.5); 
+    () => {
+      if (map.getLayer('parkfill'))   map.setPaintProperty('parkfill', 'fill-opacity', 0.5);
     }
-    
   ];
   steps.forEach((fn, i) => setTimeout(fn, i * 800));
 }
