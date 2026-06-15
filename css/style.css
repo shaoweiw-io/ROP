@@ -15,9 +15,9 @@ html, body { margin: 0; padding: 0; height: 100%; }
   position: fixed;
   pointer-events: none;
   z-index: 1001;
-  top: -20px;    
-  left: 0;  
-  width: 600px; 
+  top: -20px;     
+  left: 0;      
+  width: 600px;     
   height: auto;
   display: block;
   opacity: 0;
@@ -35,15 +35,16 @@ html, body { margin: 0; padding: 0; height: 100%; }
   opacity: 0.2;
   pointer-events: none;
   background-image: url('../assets/images/yurok_textile_verticle.png');
-  background-repeat: repeat-y;     
+  background-repeat: repeat-y;    
   background-position: top center;
-  background-size: 120px auto;     
+  background-size: 120px auto;    
 }
 .weave-band--sidebar {
   width: 90px;
   opacity: 0.12;
   background-size: 90px auto;
 }
+
 
 #intro {
   position: fixed; inset: 0; z-index: 1500;
@@ -73,7 +74,7 @@ html, body { margin: 0; padding: 0; height: 100%; }
 }
 .intro-inner {
   position: relative;
-  padding: 52px 52px 44px 150px;   
+  padding: 52px 52px 44px 150px;
 }
 .intro-kicker {
   margin: 0 0 14px;
@@ -106,16 +107,38 @@ html, body { margin: 0; padding: 0; height: 100%; }
 #intro-enter:hover { background: var(--ochre-lt); }
 #intro-enter:active { transform: translateY(1px); }
 
-#wordmark {
-  position: absolute; top: 18px; left: 20px; z-index: 1000;
-  padding: 9px 15px;
-  background: rgba(236,226,204,0.92);
-  border-left: 3px solid var(--ochre);
-  border-radius: 3px;
-  box-shadow: 0 2px 10px rgba(43,33,24,0.16);
-  font-family: Georgia, serif; font-size: 15px; font-weight: 600; color: var(--ink);
-  max-width: 60vw;
+
+#map-headline {
+  position: absolute;
+  top: 30px; left: 34px;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  pointer-events: none;
+  transition: opacity 0.6s ease 0.3s;
 }
+.hl-kicker {
+  font: italic 400 13px/1 Georgia, serif;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(236,226,204,0.7);
+  margin-bottom: 10px;
+}
+.hl-title {
+  font: 600 96px/0.9 Georgia, serif;
+  letter-spacing: -0.02em;
+  color: rgba(236,226,204,0.92);
+  text-shadow: 0 2px 24px rgba(0,0,0,0.35);
+}
+.hl-sub {
+  font: italic 400 16px/1 Georgia, serif;
+  letter-spacing: 0.02em;
+  color: rgba(236,226,204,0.6);
+  margin-top: 12px;
+}
+
+.intro-active #map-headline { opacity: 0; pointer-events: none; }
+
 #land-ack {
   position: absolute; bottom: 20px; left: 20px; z-index: 1000;
   max-width: 280px; padding: 10px 14px;
@@ -154,7 +177,6 @@ html, body { margin: 0; padding: 0; height: 100%; }
   padding: 4px 9px;
   border-radius: 3px;
 }
-
 
 #sidebar {
   position: absolute; top: 0; right: -460px;
