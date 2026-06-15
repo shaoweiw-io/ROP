@@ -254,13 +254,10 @@ function buildCompare(p) {
   return `
     <h2 class="site-name">${p.feature_name || ''}</h2>
     <p class="site-formerly">formerly <s>${p.rop_renaming_former_name || ''}</s></p>
-
+    ${img}
     ${p.description ? `<p class="site-lead">${p.description}</p>` : ''}
-
     ${p.rop_renaming_meaning ? `<p class="site-desc">${p.rop_renaming_meaning}</p>` : ''}
-
     <hr class="section-rule" />
-
     <p class="site-meta">${p.rop_renaming_park_unit || ''}</p>
     <p class="compare-point"><span class="label">Park District</span>${p.rop_renaming_park_district || ''}</p>
     <p class="compare-point"><span class="label">Tribal Partner</span>${p.rop_renaming_tribal_partner || ''}</p>
