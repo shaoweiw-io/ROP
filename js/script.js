@@ -247,25 +247,16 @@ function buildCompare(p) {
   return `
     <h2 class="site-name">${p.feature_name || ''}</h2>
     <p class="site-formerly">formerly <s>${p.rop_renaming_former_name || ''}</s></p>
-    <p class="site-lead">
-      On the modern map this is a single point inside a park boundary. On
-      T. T. Waterman's 1920 survey, the same shoreline is a densely <em>named</em>
-      coast — every sea-stack, gully, and resting-place on the trail carries a Yurok name.
-    </p>
-    <figure class="site-figure">
-      <img src="${p.compare_map}" class="zoomable"
-           alt="Waterman 1920, Rectangle J" onclick="openLightbox('${p.compare_map}')" />
-    </figure>
-    <p class="site-caption">${p.compare_source || ''}. Tap to enlarge.</p>
-    <p class="compare-point"><span class="label">sü'mig (no. 11)</span>the headland now called Patrick's Point — restored as Sue-meg.</p>
-    <p class="compare-point"><span class="label">o-le'M (no. 10)</span>a camp site — a seasonal node erased from the modern map.</p>
-    <p class="compare-point"><span class="label">woksě'i (no. 34)</span>a resting-place on the trail — the rhythm of moving along the coast.</p>
+
+    ${p.description ? `<p class="site-lead">${p.description}</p>` : ''}
+
+    ${p.rop_renaming_meaning ? `<p class="site-desc">${p.rop_renaming_meaning}</p>` : ''}
+
     <hr class="section-rule" />
-    <p class="source-note">
-      Waterman's account is treated here not as an unmediated Indigenous map, but as an
-      early ethnographic record whose place-names allow a partial reorientation of the
-      colonial / state-park map.
-    </p>
+
+    <p class="site-meta">${p.rop_renaming_park_unit || ''}</p>
+    <p class="compare-point"><span class="label">Park District</span>${p.rop_renaming_park_district || ''}</p>
+    <p class="compare-point"><span class="label">Tribal Partner</span>${p.rop_renaming_tribal_partner || ''}</p>
   `;
 }
 
