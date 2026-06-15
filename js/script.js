@@ -20,7 +20,7 @@ const PANEL_W = 460;
 
 const CAMERA = {
   "Chkweges 'W-a'aag": { zoom: 16.5, pitch: 75, bearing: 270, duration: 2000 },
-  "Sumeg Village":     { zoom: 17.5, pitch: 68, bearing: 120, duration: 1900 },
+  "Sumêg Village":     { zoom: 17.5, pitch: 68, bearing: 120, duration: 1900 },
   "Sue-meg Point":     { zoom: 15,   pitch: 0,  bearing: 0,   duration: 1500 }
 };
 const CAMERA_DEFAULT = { zoom: 15, pitch: 0, bearing: 0, duration: 1500 };
@@ -276,7 +276,6 @@ function buildCompare(p) {
     <p class="site-meta">${p.rop_renaming_park_unit || ''}</p>
     <p class="compare-point"><span class="label">Park District</span>${p.rop_renaming_park_district || ''}</p>
     <p class="compare-point"><span class="label">Tribal Partner</span>${p.rop_renaming_tribal_partner || ''}</p>
-    ${p.compare_source ? `<p class="source-note">Source: ${p.compare_source}</p>` : ''}
   `;
 }
 
