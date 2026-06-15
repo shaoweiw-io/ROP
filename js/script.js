@@ -186,10 +186,10 @@ map.on('click', (e) => {
 
   if (p.feature_type === 'water') {
     showPhoto(p);
-  } else if (p.compare_map) {
-    openSidebar(f, buildCompare(p));  
+  } else if (p.rop_renaming_new_name) {
+    openSidebar(f, buildCompare(p));
   } else {
-    openSidebar(f, buildPlace(p));     
+    openSidebar(f, buildPlace(p));
   }
 });
 
