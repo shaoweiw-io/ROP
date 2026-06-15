@@ -102,12 +102,12 @@ map.on('load', () => {
       features: [
         {
           type: 'Feature',
-          geometry: { type: 'Point', coordinates: [-123.89923, 41.43176] },  // ancestral
+          geometry: { type: 'Point', coordinates: [-123.89923, 41.43176] }, 
           properties: { title: 'YUROK ANCESTRAL TERRITORY', kind: 'ancestral' }
         },
         {
           type: 'Feature',
-          geometry: { type: 'Point', coordinates: [-123.87246, 41.34641] },  // reservation
+          geometry: { type: 'Point', coordinates: [-123.87246, 41.34641] }, 
           properties: { title: 'YUROK RESERVATION', kind: 'reservation' }
         }
       ]
@@ -244,6 +244,13 @@ document.getElementById('land-ack').addEventListener('click', () => {
 });
 
 function buildCompare(p) {
+  const img = p.image_link
+    ? `<figure class="site-figure">
+         <img src="${p.image_link}" class="zoomable" alt="${p['alt-text'] || ''}"
+              onclick="openLightbox('${p.image_link}')" />
+         ${p.caption ? `<figcaption class="site-caption">${p.caption}</figcaption>` : ''}
+       </figure>`
+    : '';
   return `
     <h2 class="site-name">${p.feature_name || ''}</h2>
     <p class="site-formerly">formerly <s>${p.rop_renaming_former_name || ''}</s></p>
