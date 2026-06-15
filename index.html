@@ -2,26 +2,62 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>Reexamining Our Past: Sue-meg</title>
+    <title>Reexamining Our Past: SUE-MEG</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-
-    <link
-      href="https://api.mapbox.com/mapbox-gl-js/v3.24.0/mapbox-gl.css"
-      rel="stylesheet"
-    />
+    <link href="https://api.mapbox.com/mapbox-gl-js/v3.24.0/mapbox-gl.css" rel="stylesheet" />
     <link rel="stylesheet" href="css/style.css" />
   </head>
-
-  <body>
+  <body class="intro-active">
     <div id="map"></div>
 
-    <h1>Reexamining Our Past: Sue-meg</h1>
-    <div id="hint">Tap a point to enter · drag &amp; zoom to explore</div>
+    <img id="salmon-overlay" src="assets/images/salmon_graphic.png" alt="" aria-hidden="true" />
 
-    <aside id="focus-panel">
-      <button id="panel-close" aria-label="Close">×</button>
-      <div id="panel-body"></div>
+    <div id="intro">
+      <div class="intro-card">
+        <div class="weave-band" aria-hidden="true"></div>
+        <div class="intro-inner">
+          <p class="intro-kicker">Humboldt County · Redwood Coast</p>
+          <h1 class="intro-title">Reexamining Our Past: SUE-MEG</h1>
+          <hr class="intro-rule" />
+          <p class="intro-lead">
+            In 2021, Patrick's Point State Park was restored to its Yurok name
+            <em>Sue-Meg</em> — the first site renamed under California's
+            Reexamining Our Past initiative. This map holds the modern park beside
+            the older, far denser Yurok geography of the same shoreline.
+          </p>
+          <p class="intro-hint">Tap any point to explore. The ocean, too, is a place.</p>
+          <p class="intro-ack">
+            Sue-meg lies on the ancestral lands of the Coastal Yurok
+            (Ner'-er-nerh) people.
+          </p>
+          <button id="intro-enter">Enter the Map</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="wordmark">Reexamining Our Past: Sue-meg</div>
+    <div id="land-ack">
+      <span class="land-ack-text">Ancestral lands of the Coastal Yurok (Ner'-er-nerh) people.</span>
+      <span class="land-ack-cta"> See the wider territory ↗</span>
+    </div>
+
+    <aside id="sidebar">
+      <button id="sidebar-close" aria-label="Close">×</button>
+      <div class="weave-band weave-band--sidebar" aria-hidden="true">
+        <img src="assets/images/tribal_textile.avif" alt="" />
+      </div>
+      <div id="sidebar-content"></div>
     </aside>
+
+    <div id="photo-overlay">
+      <img id="photo-overlay-img" src="" alt="" />
+      <p id="photo-overlay-caption"></p>
+    </div>
+
+    <div id="lightbox" class="lightbox">
+      <span class="lightbox-close" onclick="closeLightbox()">×</span>
+      <img id="lightbox-img" class="lightbox-content" src="" alt="" />
+    </div>
 
     <script src="https://api.mapbox.com/mapbox-gl-js/v3.24.0/mapbox-gl.js"></script>
     <script src="js/script.js"></script>
