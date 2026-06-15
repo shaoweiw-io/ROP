@@ -6,7 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link href="https://api.mapbox.com/mapbox-gl-js/v3.24.0/mapbox-gl.css" rel="stylesheet" />
     <link rel="stylesheet" href="css/style.css" />
-    
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;500;600&display=swap" rel="stylesheet" />
+
     <!--
       Reexamining Our Past: SUE-MEG
       Cartographer: Shaowei Wang
@@ -26,14 +28,14 @@
         Coast Salish artist, not Yurok - to be reconsidered for any public version.
       - Textile pattern motif: Yurok Tribe (yuroktribe.org)
     -->
-    
+
   </head>
-
-
   <body class="intro-active">
     <div id="map"></div>
 
+
     <img id="salmon-overlay" src="assets/images/salmon_graphic.png" alt="" aria-hidden="true" />
+
 
     <div id="intro">
       <div class="intro-card">
@@ -58,14 +60,19 @@
       </div>
     </div>
 
-    <div id="wordmark">Reexamining Our Past: Sue-meg</div>
+    <div id="map-headline">
+      <span class="hl-kicker">Reexamining Our Past</span>
+      <span class="hl-title">SUE-MEG</span>
+      <span class="hl-sub">the coast, renamed and re-membered</span>
+    </div>
+
     <div id="land-ack">
       <span class="land-ack-text">Ancestral lands of the Coastal Yurok (Ner'-er-nerh) people.</span>
       <span class="land-ack-cta"> See the wider territory ↗</span>
     </div>
 
     <div id="credit">Cartographer: Shaowei Wang (2026)</div>
-    
+
     <aside id="sidebar">
       <button id="sidebar-close" aria-label="Close">×</button>
       <div class="weave-band weave-band--sidebar" aria-hidden="true">
