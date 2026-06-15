@@ -22,16 +22,16 @@
       "type": "Feature",
       "geometry": { "type": "Point", "coordinates": [-124.15207, 41.13599] },
       "properties": {
-        "feature_name": "Sumeg Village",
+        "feature_name": "Sumêg Village",
         "feature_type": "village",
         "built": "1990s",
-        "description": "A reconstructed Yurok village - dance house, sweat house, changing houses, family houses, and a redwood canoe - planned and built by Yurok people with park staff. Although permanent villages lay north and south, the Sue-meg area itself was primarily a seasonal encampment.",
+        "description": "Sumêg Village is a reconstructed Yurok plank-house village, planned and built in the 1990s by Yurok people working with local park staff. Its family houses, sweathouse, changing houses, dance house, and redwood canoe make visible a permanent-village form within a place that was used primarily as a seasonal Yurok encampment. It is a living site for teaching, ceremony, and cultural transmission.",
         "image_link": "assets/images/sumeg_village.jpg",
-        "alt-text": "Sumeg - a reconstructed Yurok village",
-        "caption": "Sumeg Village, rebuilt in the 1990s - a living cultural site, not a museum exhibit."
+        "alt-text": "Sumêg - a reconstructed Yurok village",
+        "caption": "Sumêg Village, rebuilt in the 1990s - a living cultural site, not a museum exhibit."
       }
     },
-    
+
     {
       "type": "Feature",
       "geometry": { "type": "Point", "coordinates": [-124.18483, 41.13306] },
@@ -39,7 +39,7 @@
         "feature_name": "Chkweges 'W-a'aag",
         "feature_type": "land",
         "description": "The larger of the Turtle Rocks near Sue-meg. The Yurok Language Project records chkweges as “hair seal” and Chkweges ’W-a’aag as a sea-stack near Patrick’s Point. As an offshore named place, it marks the ocean not as empty space, but as part of a Yurok coastal geography of animals, rocks, travel, and memory.",
-        "image_link": "assets/images/turtle_rocks.jpg",
+        "image_link": "assets/images/Turtle_Rocks.jpg",
         "alt-text": "“Seals’ Rock” / Turtle Rocks",
         "caption": "“Seals’ Rock” / Turtle Rocks"
       }
